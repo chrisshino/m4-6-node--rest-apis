@@ -17,3 +17,9 @@ Write out each endpoint, its method, and brief description of waht it should do.
 _This activity is more about the discussion in how to best organize data endpoints. There will not be any coding._
 
 ## Your Answer
+
+`/clients/`, `Get`, Grabs all the client data
+`/clients/{user}`, `Get` Grabs the clients page with unique id
+`/clients/`, `Post` Creats a new clients in the clients data
+`/clients/{user}` `Delete` Delete a specific user from the db
+
