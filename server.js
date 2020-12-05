@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const clients = require("./handlers/clientHandlers");
 const { clientIdExists } = require("./handlers/clientHandlers");
+const words = require("./handlers/hangmanHandlers");
 
 express()
   .use(function (req, res, next) {
@@ -68,6 +69,33 @@ express()
         status: "user doesnt exist ",
       });
     }
+  })
+
+  .get("/hangman/word/:id", (req, res) => {
+    const id = req.params.id;
+
+    res.status(200).json({
+      status: "success",
+      data: words.getWord(id),
+    });
+  })
+
+  .get("/hangman/word", (req, res) => {
+    
+    res.json({
+      status: 'success',
+      response: words.randomWord()
+    })
+  })
+  
+  .get("/hangman/guess/:id/:letter", (req, res) => {
+    const id = req.params.id
+    const letter = req.params.letter
+
+    res.status(200).json({
+      status: 'success',
+      response: words.correctWord(id, letter)
+    })
   })
 
   .listen(8000, () => console.log(`Listening on port 8000`));
